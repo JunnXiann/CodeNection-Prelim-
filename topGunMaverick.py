@@ -1,30 +1,25 @@
-T, N, M = map(int, input().split())
-time_N, alt_N = [0] * N, [0] * N
-time_M, alt_M = [0] * M, [0] * M
-print(time_N)
+T,N,M = map(int, input().split())
+Ntime, Nalt = [0] * N, [0] * N
+Mtime, Malt = [0] * M, [0] * M
 
-max_diff = 0
-
-for i in range(N):    
-    time_N[i], alt_N[i] = map(int, input().split())
+for i in range(N):
+    Ntime[i], Nalt[i] = map(int, input().split())
     
 for i in range(M):
-    time_M[i], alt_M[i] = map(int, input().split())
-
+    Mtime[i], Malt[i] = map(int, input().split())
+    
+maxdiff = 0
 i, j = 0, 0
-timeframe_N, timeframe_M = time_N[i], time_M[j]
+Ntimeframe, Mtimeframe = Ntime[i], Mtime[j]
 
-while (timeframe_N < T) or (timeframe_M < T):
-    
-    if (timeframe_M == timeframe_N):
-        max_diff = max(max_diff, alt_M[j] - alt_N[i])
-        if i < len(time_N) - 1: i += 1; timeframe_N += time_N[i]
-        if j < len(time_M) - 1: j += 1; timeframe_M += time_M[j]
-    elif (timeframe_M > timeframe_N):
-        max_diff = max(max_diff, alt_M[j] - alt_N[i])
-        if i < len(time_N) - 1: i += 1; timeframe_N += time_N[i]
+while Ntimeframe < T or Mtimeframe < T:
+    maxdiff = max(maxdiff, Malt[j] - Nalt[i])
+    if Ntimeframe == Mtimeframe:
+        if i < len(Ntime) - 1: i += 1; Ntimeframe += Ntime[i];
+        if j < len(Mtime) - 1: j += 1; Mtimeframe += Mtime[j];
+    elif Ntimeframe > Mtimeframe:
+        if j < len(Mtime) - 1: j += 1; Mtimeframe += Mtime[j];
     else:
-        max_diff = max(max_diff, alt_M[j] - alt_N[i])
-        if j < len(time_M) - 1: j += 1; timeframe_M += time_M[j]
-    
-print(max_diff)
+        if i < len(Ntime) - 1: i += 1; Ntimeframe += Ntime[i];
+            
+print(maxdiff)
